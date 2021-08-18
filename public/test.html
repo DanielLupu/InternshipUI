@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<form>
+    <input type="text" id="eventTitle" name="eventTitle" placeholder="Event Title" style="width: 50%; height: 25px;"><br><br>
+    <input type="text" id="interviewers" name="interviewers" placeholder="Interviewers" style="width: 50%; height: 25px;"> 
+    <select id="usersSelect" name="users" id="users">
+        <option value="user1">user1@nagarro.com - HR</option>
+        <option value="user2">user2@nagarro.com - TECH</option>
+      </select>
+      <br><br>
+    <input type="text" id="candidate" name="candidate" placeholder="Required candidate" style="width: 50%; height: 25px;">
+    <select name="users" id="users">
+        <option value="user1">candidate1@gmail.com</option>
+        <option value="user2">candidate2@gmail.com</option>
+      </select>
+      <br>
+      <br>
+    <input type="text" id="description" name="description" placeholder="Interview description" style="width: 50%; height: 70px;"><br><br>
+    <button>Create event</button>
+</form>
+<script>
+    function initiate(){
+    document.getElementById("usersSelect").onclick = console.log("aici");
+    }
+</script>
+</body>
+</html>
