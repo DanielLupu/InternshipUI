@@ -10,53 +10,42 @@ function Login(props) {
   const LOGIN_PATH = "http://localhost:8081/api/auth/login";
 
   const handleLogin = () => {
+    var userMail = mailField.value;
     setError(null);
     setLoading(true);
-    var request = new XMLHttpRequest();
-    request.open("POST", LOGIN_PATH);
-    request.setRequestHeader("Content-Type", "application/json");
-    var userMail = mailField.value;
-    try {
-      request.send(
-        JSON.stringify({ mail: userMail, password: passwordField.value })
-      );
-      request.onreadystatechange = function () {
-        if (request.readyState === XMLHttpRequest.DONE) {
-          if (request.status === 200) {
-            var token = JSON.parse(request.response, function (key, value) {
-              if (key === "token") {
-                let tokenValue = JSON.stringify(value);
-                if (tokenValue.length !== 0) {
-                  console.log(tokenValue);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", LOGIN_PATH);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(
+      JSON.stringify({ mail: userMail, password: passwordField.value })
+    );
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        var tokenValue = JSON.parse(xhr.responseText).token;
+        if (tokenValue.length !== 0) {
+          console.log(tokenValue);
 
-                   const USERS_API_URL = "http://localhost:8081/api/users";
-                   var getUsersRequest = new XMLHttpRequest();
-                
-                  getUsersRequest.open("GET", USERS_API_URL);
-                  getUsersRequest.setRequestHeader(
-                    "Authorization",
-                    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVEVDSCIsIm1haWwiOiJ0IiwiZXhwIjoxNjI5MzEwNDEwLCJpYXQiOjE2MjkzMDY4MTB9.nriFNt-LVXsSv9wF7PRyAZZ0_yZLL0GYad0I3PHnQ9g"
-                  );
+          const USERS_API_URL = "http://localhost:8081/api/users";
+          var getUsersRequest = new XMLHttpRequest();
+          getUsersRequest.open("GET", USERS_API_URL);
+          getUsersRequest.setRequestHeader(
+              "Authorization",
+              `Bearer ${tokenValue}`
+          );
 
-                  getUsersRequest.onreadystatechange = function () {
-                    if (getUsersRequest.status === 200) {
-                      var response = getUsersRequest.responseText;
-                      console.log(response);
-                    }
-                  };
-                  getUsersRequest.send();
-                }
-              }
-            });
-            setLoading(false);
-          } else {
-            setError("invalid credentials");
-          }
+          getUsersRequest.onreadystatechange = function () {
+            if (getUsersRequest.status === 200) {
+              var response = getUsersRequest.responseText;
+              console.log(response);
+            }
+          };
+          getUsersRequest.send();
         }
-      };
-    } catch (error) {
-      console.log(error);
-    }
+        setLoading(false);
+      } else {
+        setError("invalid credentials");
+      }
+    };
   };
 
   return (
