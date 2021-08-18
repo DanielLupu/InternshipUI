@@ -7,8 +7,8 @@ const options = [
         value: "user1@nagarro.com",
     },
     {
-        label: "user1",
-        value: "user1@nagarro.com",
+        label: "user2",
+        value: "user2@nagarro.com",
     }
 ];
 
@@ -18,14 +18,14 @@ class UsersSelect extends Component{
         constructor(props){
             super(props);   
             console.log("da");
-            var getUsersRequest = new XMLHttpRequest();
-            getUsersRequest.open("GET" , USERS_API_URL);
-            getUsersRequest.setRequestHeader("Content-Type", "application/json");
-            getUsersRequest.setRequestHeader("Authorization",
-             "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVEVDSCIsIm1haWwiOiJ0IiwiZXhwIjoxNjI5Mjk0ODEwLCJpYXQiOjE2MjkyOTEyMTB9.phbtMXILIISUKfKAXyXFztGxqw7TBk-zmdX9-ibL5Ys" );
-            getUsersRequest.send();
-            var response = JSON.parse(getUsersRequest.response);
-            console.log(response);
+            // var getUsersRequest = new XMLHttpRequest();
+            // getUsersRequest.open("GET" , USERS_API_URL);
+    
+            // getUsersRequest.setRequestHeader("Authorization",
+            //  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVEVDSCIsIm1haWwiOiJ0IiwiZXhwIjoxNjI5Mjk0ODEwLCJpYXQiOjE2MjkyOTEyMTB9.phbtMXILIISUKfKAXyXFztGxqw7TBk-zmdX9-ibL5Ys" );
+            // getUsersRequest.send();
+            // var response = JSON.parse(getUsersRequest.response);
+            // console.log(response);
         }
         render(){
             return (

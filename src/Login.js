@@ -29,18 +29,18 @@ function Login(props) {
                 if (tokenValue.length !== 0) {
                   console.log(tokenValue);
 
-                  const USERS_API_URL = "http://localhost:8081/api/users";
-                  var getUsersRequest = new XMLHttpRequest();
-                  getUsersRequest.open("GET", USERS_API_URL, true);
-
+                   const USERS_API_URL = "http://localhost:8081/api/users";
+                   var getUsersRequest = new XMLHttpRequest();
+                
+                  getUsersRequest.open("GET", USERS_API_URL);
                   getUsersRequest.setRequestHeader(
                     "Authorization",
-                    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVEVDSCIsIm1haWwiOiJ0IiwiZXhwIjoxNjI5MzAwNTEyLCJpYXQiOjE2MjkyOTY5MTJ9.LMesJfSpacJMIaw23g-thaX8_5hrpMPr4P5InVimhWI"
+                    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVEVDSCIsIm1haWwiOiJ0IiwiZXhwIjoxNjI5MzEwNDEwLCJpYXQiOjE2MjkzMDY4MTB9.nriFNt-LVXsSv9wF7PRyAZZ0_yZLL0GYad0I3PHnQ9g"
                   );
 
                   getUsersRequest.onreadystatechange = function () {
                     if (getUsersRequest.status === 200) {
-                      var response = JSON.parse(getUsersRequest.response);
+                      var response = getUsersRequest.responseText;
                       console.log(response);
                     }
                   };
@@ -48,7 +48,6 @@ function Login(props) {
                 }
               }
             });
-            console.log(token);
             setLoading(false);
           } else {
             setError("invalid credentials");
